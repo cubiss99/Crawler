@@ -6,15 +6,15 @@ require_once('VnexpressParser.php');
 if (isset($_POST['VnExpress'])) {
     $url = $_POST['VnExpress'];
     $parser = new VnexpressParser();
-    $parser->articleParser($url);
+    $parser->articleParserr($url);
 } else if (isset($_POST['Dantri'])) {
     $url = $_POST['Dantri'];
     $parser = new DantriParser();
-    $parser->articleParser($url);
+    $parser->articleParserr($url);
 } else if (isset($_POST['Vietnamnet'])) {
     $url = $_POST['Vietnamnet'];
     $parser = new VietnamnetParser();
-    $parser->articleParser($url);
+    $parser->articleParserr($url);
 }
 
 ?>
@@ -67,6 +67,7 @@ if (isset($_POST['VnExpress'])) {
             <button type="submit">Crawl</button>
 
         </form>
+        <a href="danhsach.php" style="display:block;margin-top:20px">Xem danh sách</a>
     </div>
 </body>
 
