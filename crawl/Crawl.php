@@ -2,19 +2,13 @@
 require_once('DantriParser.php');
 require_once('VietnamnetParser.php');
 require_once('VnexpressParser.php');
+require_once('ParserFactory.php');
 
-if (isset($_POST['VnExpress'])) {
-    $url = $_POST['VnExpress'];
-    $parser = new VnexpressParser();
-    $parser->articleParserr($url);
-} else if (isset($_POST['Dantri'])) {
-    $url = $_POST['Dantri'];
-    $parser = new DantriParser();
-    $parser->articleParserr($url);
-} else if (isset($_POST['Vietnamnet'])) {
-    $url = $_POST['Vietnamnet'];
-    $parser = new VietnamnetParser();
-    $parser->articleParserr($url);
+if (isset($_POST['type'], $_POST['parserUrl'])) {
+    $type = $_POST['type'];
+    $parserUrl = $_POST['parserUrl'];
+    $article = ParserFactory::parser($type);
+    $article->articleParserr($parserUrl);
 }
 
 ?>
@@ -52,18 +46,21 @@ if (isset($_POST['VnExpress'])) {
         <h1 style="text-align:center">Crawl Article</h1>
         <form action="Crawl.php" method="post">
 
-            <input type="text" name="VnExpress" placeholder="VnExpress" size="40" />
+            <input type="text" name="parserUrl" placeholder="VnExpress" size="40" />
+            <input type="hidden" name="type" value="VnExpress" />
             <button type="submit">Crawl</button>
         </form>
         <br>
         <form action="Crawl.php" method="post">
-            <input type="text" name="Dantri" placeholder="Dân trí" size="40" />
+            <input type="text" name="parserUrl" placeholder="Dân trí" size="40" />
+            <input type="hidden" name="type" value="Dantri" />
             <button type="submit">Crawl</button>
 
         </form>
         <br>
         <form action="Crawl.php" method="post">
-            <input type="text" name="Vietnamnet" placeholder="Vietnamnet" size="40" />
+            <input type="text" name="parserUrl" placeholder="Vietnamnet" size="40" />
+            <input type="hidden" name="type" value="Vietnamnet" />
             <button type="submit">Crawl</button>
 
         </form>
